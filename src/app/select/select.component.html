@@ -1,0 +1,4 @@
+<select class="form-control" (change)="selected.emit($event.target.value)">
+    <option *ngFor="let option of options" value="{{ option.map ? option[0] : option }}" [selected]="(option.map ? option[0] : option) == model">
+        {{ option.map ? (option.length >= 2 ? option[1] : option[0]) : option }}</option>
+</select>
