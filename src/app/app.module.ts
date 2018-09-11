@@ -11,6 +11,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { SelectComponent } from './select/select.component';
+import { RouterModule } from '@angular/router';
 
 library.add(fas, far, fab);
 
@@ -23,7 +24,8 @@ library.add(fas, far, fab);
     BrowserModule,
     NgbModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
