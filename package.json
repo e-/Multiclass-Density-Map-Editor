@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href /dist/",
+    "build": "ng build --prod --base-href /Multiclass-Density-Map-Editor/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

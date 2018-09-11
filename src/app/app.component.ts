@@ -291,7 +291,7 @@ export class AppComponent implements OnInit {
         this.spec = JSON.stringify(spec, null, 2);
 
         let config = new MDM.Configuration(spec);
-        config.load('/assets/').then(() => {
+        config.load('assets/').then(() => {
             let interp = new MDM.Interpreter(config);
 
             interp.interpret();
