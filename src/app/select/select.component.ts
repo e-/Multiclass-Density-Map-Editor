@@ -9,6 +9,7 @@ export class SelectComponent implements OnInit {
     @Input('options') options:string[][];
     @Input('model') model:string;
     @Output('selected') selected = new EventEmitter<string>();
+    @Input('filter') filter:[];
 
     constructor() { }
 

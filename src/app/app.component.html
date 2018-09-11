@@ -20,99 +20,210 @@
     </div>
 </nav>
 
-<div class="container pt-2">
-    <form>
-        <div class="form-group row">
-            <label for="data-type" class="col-sm-2 col-form-label">Data Type</label>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="data-type" id="data-type-1" value="option1" [checked]="dataType === 1">
-                    <label class="form-check-label" for="data-type-1" (click)="dataType=1">
-                        Sample Data
-                    </label>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-sm-4">
+            <form>
+                <div class="form-group row">
+                    <label for="data-type" class="col-sm-4 col-form-label">Data Type</label>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="data-type" id="data-type-1" value="option1" [checked]="dataType === 1">
+                            <label class="form-check-label" for="data-type-1" (click)="dataType=1">
+                                Sample Data
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="data-type" id="data-type-2" value="option2" [checked]="dataType === 2"
+                                disabled>
+                            <label class="form-check-label" for="data-type-2" (click)="dataType=2">
+                                From my disk (no upload)
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="data-type" id="data-type-2" value="option2" [checked]="dataType === 2">
-                    <label class="form-check-label" for="data-type-2" (click)="dataType=2">
-                        From my disk (no upload)
-                    </label>
+                <div class="form-group row">
+                    <label for="dataset" class="col-sm-4 col-form-label">Dataset</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="DatasetOptions" [model]="dataset" (selected)="dataset=$event;change()"></app-select>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="dataset" class="col-sm-2 col-form-label">Dataset</label>
-            <div class="col-sm-10">
-                <app-select [options]="DatasetOptions" [model]="dataset" (selected)="dataset=$event;change()"></app-select>
-            </div>
-        </div>
 
-        <h5>Rebin</h5>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Type</label>
-            <div class="col-sm-10">
-                <app-select [options]="RebinTypeOptions" [model]="rebinType" (selected)="rebinType=$event;change()"></app-select>
-            </div>
-        </div>
-        <div class="form-group row" [hidden]="rebinType == 'none'">
-            <label class="col-sm-2 col-form-label">Aggregation</label>
-            <div class="col-sm-10">
-                <app-select [options]="RebinAggregationOptions" [model]="rebinAggregation" (selected)="rebinAggregation=$event;change()"></app-select>
-            </div>
-        </div>
-        <div class="form-group row" [hidden]="rebinType != 'square'">
-            <label for="rebin-size" class="col-sm-2 col-form-label">Size</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="rebinSize" min="2" [(ngModel)]="rebinSize" (change)="change()">
-            </div>
-        </div>
-        <div class="form-group row" [hidden]="rebinType != 'rect'">
-            <label for="rebin-width" class="col-sm-2 col-form-label">Width</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="rebinWidth" min="2" [(ngModel)]="rebinWidth" (change)="change()">
-            </div>
-        </div>
-        <div class="form-group row" [hidden]="rebinType != 'rect'">
-            <label for="rebin-height" class="col-sm-2 col-form-label">Height</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="rebinHeight" min="2" [(ngModel)]="rebinHeight" (change)="change()">
-            </div>
-        </div>
+                <h5>Rebin</h5>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Type</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="RebinTypeOptions" [model]="rebinType" (selected)="rebinType=$event;change()"
+                            [filter]="dataset == 'mn_data.json' ? [4] : []"
+                        ></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType == 'none'">
+                    <label class="col-sm-4 col-form-label">Aggregation</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="RebinAggregationOptions" [model]="rebinAggregation" (selected)="rebinAggregation=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'square'">
+                    <label for="rebin-size" class="col-sm-4 col-form-label">Size</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="rebinSize" min="16" [(ngModel)]="rebinSize" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'rect'">
+                    <label for="rebin-width" class="col-sm-4 col-form-label">Width</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="rebinWidth" min="16" [(ngModel)]="rebinWidth" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'rect'">
+                    <label for="rebin-height" class="col-sm-4 col-form-label">Height</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="rebinHeight" min="16" [(ngModel)]="rebinHeight" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'voronoi'">
+                    <label for="rebin-height" class="col-sm-4 col-form-label"># of Centers</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="rebinNumCenters" min="2" [(ngModel)]="rebinNumCenters" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'topojson'">
+                    <label class="col-sm-4 col-form-label">Url</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="RebinUrlOptions" [model]="rebinUrl" (selected)="rebinUrl=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'topojson' || rebinUrl != 'us.json'">
+                    <label class="col-sm-4 col-form-label">Feature</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="RebinFeatureOptions" [model]="rebinFeature" (selected)="rebinFeature=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rebinType != 'topojson' && rebinType != 'voronoi'">
+                    <label for="rebin-height" class="col-sm-4 col-form-label">Stroke</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="rebinStroke" [(ngModel)]="rebinStroke" (change)="change()">
+                    </div>
+                </div>
 
-        <h5>Rescale</h5>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Type</label>
-            <div class="col-sm-10">
-                <app-select [options]="RescaleTypeOptions" [model]="rescaleType" (selected)="rescaleType=$event;change()"></app-select>
-            </div>
-        </div>
-        <div class="form-group row" [hidden]="rescaleType != 'equidepth'">
-            <label for="rebin-size" class="col-sm-2 col-form-label">Levels</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="rescaleLevels" min="2" [(ngModel)]="rescaleLevels" (change)="change()">
-            </div>
-        </div>
+                <h5>Rescale</h5>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Type</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="RescaleTypeOptions" [model]="rescaleType" (selected)="rescaleType=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="rescaleType != 'equidepth'">
+                    <label for="rebin-size" class="col-sm-4 col-form-label">Levels</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="rescaleLevels" min="2" [(ngModel)]="rescaleLevels" (change)="change()">
+                    </div>
+                </div>
 
-        <h5>Compose</h5>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Mix</label>
-            <div class="col-sm-10">
-                <app-select [options]="ComposeMixOptions" [model]="composeMix" (selected)="composeMix=$event;change()"></app-select>
-            </div>
+                <h5>Compose</h5>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Mix</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="ComposeMixOptions" [model]="composeMix" (selected)="composeMix=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'blend'">
+                    <label class="col-sm-4 col-form-label">Mixing</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="ComposeMixingOptions" [model]="composeMixing" (selected)="composeMixing=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'weaving'">
+                    <label class="col-sm-4 col-form-label">Shape</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="ComposeShapeOptions" [model]="composeShape" (selected)="composeShape=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'weaving' && composeMix != 'dotdensity'">
+                    <label class="col-sm-4 col-form-label">Size</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="composeSize" min="2" [(ngModel)]="composeSize" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'time'">
+                    <label class="col-sm-4 col-form-label">Interval(s)</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="composeInterval" min="0" [(ngModel)]="composeInterval" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'invmin'">
+                    <label class="col-sm-4 col-form-label">Threshold</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="composeThreshold" min="1" [(ngModel)]="composeThreshold" (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'propline' && composeMix != 'hatching'">
+                    <label class="col-sm-4 col-form-label">Sort</label>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <input type="checkbox" name="composeSort" class="form-check-input" id="composeSort" [(ngModel)]="composeSort" (change)="change()">
+                            <label class="form-check-label" for="composeSort">Use</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'propline' && composeMix != 'hatching'">
+                    <label class="col-sm-4 col-form-label">Colprop</label>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <input type="checkbox" name="composeColprop" class="form-check-input" id="composeColprop" [(ngModel)]="composeColprop" (change)="change()">
+                            <label class="form-check-label" for="composeColprop">Use</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'propline' && composeMix != 'hatching'">
+                    <label class="col-sm-4 col-form-label">Widthprop</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="ComposeWidthpropOptions" [model]="composeWidthprop" (selected)="composeWidthprop=$event;change()"></app-select>
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'propline' && composeMix != 'hatching' || composeWidthprop != 'constant'">
+                    <label class="col-sm-4 col-form-label">Widthprop Constant</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="composeWidthpropConstant" min="2" [(ngModel)]="composeWidthpropConstant"
+                            (change)="change()">
+                    </div>
+                </div>
+                <div class="form-group row" [hidden]="composeMix != 'glyph'">
+                    <label class="col-sm-4 col-form-label">GlyphSpec</label>
+                    <div class="col-sm-8">
+                        <app-select [options]="ComposeGlyphSpecOptions" [model]="composeGlyphSpec" (selected)="composeGlyphSpec=$event;change()"></app-select>
+                    </div>
+                </div>
+
+                <h5 class="pb-1">Postprocessing</h5>
+                <div class="form-group row">
+                    <label class="col-sm-4">Legend</label>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <input type="checkbox" name="useLegend" class="form-check-input" id="useLegend" [(ngModel)]="useLegend" (change)="change()">
+                            <label class="form-check-label" for="useLegend">Use</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4">Axis</label>
+                    <div class="col-sm-8">
+                        <div class="form-check">
+                            <input type="checkbox" name="useAxis" class="form-check-input" id="useAxis" [(ngModel)]="useAxis" (change)="change()">
+                            <label class="form-check-label" for="useAxis">Use</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Mixing</label>
-            <div class="col-sm-10">
-                <app-select [options]="ComposeMixingOptions" [model]="composeMixing" (selected)="composeMixing=$event;change()"></app-select>
-            </div>
+        <div class="col-sm-8">
+            <h5>Result</h5>
+            <div #result></div>
+            <h5>Specification</h5>
+            <pre class="pre-scrollable"><code>{{ spec }}</code></pre>
         </div>
-    </form>
-
-    <h4>Specification</h4>
-    <pre class="pre-scrollable"><code>{{ spec }}</code></pre>
-
-    <button class="btn btn-primary" (click)="change()">Render</button>
-
-    <div #result></div>
+    </div>
 
 </div>
 <pre>
