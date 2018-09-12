@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import * as MDM from 'multiclass-density-maps';
 import { isNumber } from 'util';
+import html2canvas from 'html2canvas';
 
 @Component({
     selector: 'app-root',
@@ -278,8 +279,8 @@ export class AppComponent implements OnInit {
         spec.rescale = { type: this.rescaleType };
         if (this.rescaleType == 'equidepth') spec.rescale.levels = this.rescaleLevels;
 
-        spec.legend = this.useLegend;
-        spec.axis = this.useAxis;
+        spec.legend = this.useLegend || this.defaultUseLegend;
+        spec.axis = this.useAxis || this.defaultUseAxis;
 
         return spec;
     }
@@ -299,5 +300,21 @@ export class AppComponent implements OnInit {
             this.result.nativeElement.querySelectorAll('*').forEach(d => d.remove());
             interp.render(this.result.nativeElement);
         })
+    }
+
+    download() {
+        html2canvas(this.result.nativeElement, {
+            scale: 4
+        }).then(canvas => {
+            let data = `data:${canvas.toDataURL('image/png')}`;
+            let link = document.createElement("a");
+
+            link.download = 'multiclass-density-map.png';
+            link.href = data;
+            document.body.appendChild(link);
+            link.click();
+            //after creating link you should delete dynamic link
+            link.remove();
+        });
     }
 }

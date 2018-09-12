@@ -1,19 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">Multiclass Density Map Editor</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="https://ieeexplore.ieee.org/abstract/document/8440817/" target="_blank"><fa-icon
-                            [icon]="['fas', 'file']"></fa-icon> Paper</a>
+                    <a class="nav-link" href="https://jaeminjo.github.io/Multiclass-Density-Maps/" target="_blank">
+                        <fa-icon [icon]="['fas', 'book-open']"></fa-icon> Gallery
+                    </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="https://github.com/e-/Multiclass-Density-Maps" target="_blank"><fa-icon [icon]="['fab', 'github']"></fa-icon>
-                        Github</a>
+                    <a class="nav-link" href="https://ieeexplore.ieee.org/abstract/document/8440817/" target="_blank">
+                        <fa-icon [icon]="['fas', 'file']"></fa-icon> Paper
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/e-/Multiclass-Density-Maps" target="_blank">
+                        <fa-icon [icon]="['fab', 'github']"></fa-icon>
+                        Github
+                    </a>
                 </li>
             </ul>
         </div>
@@ -28,14 +36,15 @@
                     <label for="data-type" class="col-md-4 col-form-label">Data Type</label>
                     <div class="col-md-8 offset">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="data-type" id="data-type-1" value="option1" [checked]="dataType === 1">
+                            <input class="form-check-input" type="radio" name="data-type" id="data-type-1" value="option1"
+                                [checked]="dataType === 1">
                             <label class="form-check-label" for="data-type-1" (click)="dataType=1">
                                 Sample Data
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="data-type" id="data-type-2" value="option2" [checked]="dataType === 2"
-                                disabled>
+                            <input class="form-check-input" type="radio" name="data-type" id="data-type-2" value="option2"
+                                [checked]="dataType === 2" disabled>
                             <label class="form-check-label" for="data-type-2" (click)="dataType=2">
                                 From my disk (no upload)
                             </label>
@@ -53,7 +62,8 @@
                 <div class="form-group row">
                     <label class="col-md-4 col-form-label">Type</label>
                     <div class="col-md-8">
-                        <app-select [options]="RebinTypeOptions" [model]="rebinType" (selected)="rebinType=$event;change()" [filter]="dataset == 'mn_data.json' ? [4] : []"></app-select>
+                        <app-select [options]="RebinTypeOptions" [model]="rebinType" (selected)="rebinType=$event;change()"
+                            [filter]="dataset == 'mn_data.json' ? [4] : []"></app-select>
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="rebinType == 'none'">
@@ -65,25 +75,29 @@
                 <div class="form-group row" [hidden]="rebinType != 'square'">
                     <label for="rebin-size" class="col-md-4 col-form-label">Size</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="rebinSize" min="16" [(ngModel)]="rebinSize" (change)="change()">
+                        <input type="number" class="form-control" name="rebinSize" min="16" [(ngModel)]="rebinSize"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="rebinType != 'rect'">
                     <label for="rebin-width" class="col-md-4 col-form-label">Width</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="rebinWidth" min="16" [(ngModel)]="rebinWidth" (change)="change()">
+                        <input type="number" class="form-control" name="rebinWidth" min="16" [(ngModel)]="rebinWidth"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="rebinType != 'rect'">
                     <label for="rebin-height" class="col-md-4 col-form-label">Height</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="rebinHeight" min="16" [(ngModel)]="rebinHeight" (change)="change()">
+                        <input type="number" class="form-control" name="rebinHeight" min="16" [(ngModel)]="rebinHeight"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="rebinType != 'voronoi'">
                     <label for="rebin-height" class="col-md-4 col-form-label"># of Centers</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="rebinNumCenters" min="2" [(ngModel)]="rebinNumCenters" (change)="change()">
+                        <input type="number" class="form-control" name="rebinNumCenters" min="2" [(ngModel)]="rebinNumCenters"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="rebinType != 'topojson'">
@@ -115,7 +129,8 @@
                 <div class="form-group row" [hidden]="rescaleType != 'equidepth'">
                     <label for="rebin-size" class="col-md-4 col-form-label">Levels</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="rescaleLevels" min="2" [(ngModel)]="rescaleLevels" (change)="change()">
+                        <input type="number" class="form-control" name="rescaleLevels" min="2" [(ngModel)]="rescaleLevels"
+                            (change)="change()">
                     </div>
                 </div>
 
@@ -141,26 +156,30 @@
                 <div class="form-group row" [hidden]="composeMix != 'weaving' && composeMix != 'dotdensity'">
                     <label class="col-md-4 col-form-label">Size</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="composeSize" min="2" [(ngModel)]="composeSize" (change)="change()">
+                        <input type="number" class="form-control" name="composeSize" min="2" [(ngModel)]="composeSize"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="composeMix != 'time'">
                     <label class="col-md-4 col-form-label">Interval(s)</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="composeInterval" min="0" [(ngModel)]="composeInterval" (change)="change()">
+                        <input type="number" class="form-control" name="composeInterval" min="0" [(ngModel)]="composeInterval"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="composeMix != 'invmin'">
                     <label class="col-md-4 col-form-label">Threshold</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="composeThreshold" min="1" [(ngModel)]="composeThreshold" (change)="change()">
+                        <input type="number" class="form-control" name="composeThreshold" min="1" [(ngModel)]="composeThreshold"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="composeMix != 'propline' && composeMix != 'hatching'">
                     <label class="col-md-4 col-form-label">Sort</label>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input type="checkbox" name="composeSort" class="form-check-input" id="composeSort" [(ngModel)]="composeSort" (change)="change()">
+                            <input type="checkbox" name="composeSort" class="form-check-input" id="composeSort"
+                                [(ngModel)]="composeSort" (change)="change()">
                             <label class="form-check-label" for="composeSort">Use</label>
                         </div>
                     </div>
@@ -169,7 +188,8 @@
                     <label class="col-md-4 col-form-label">Colprop</label>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input type="checkbox" name="composeColprop" class="form-check-input" id="composeColprop" [(ngModel)]="composeColprop" (change)="change()">
+                            <input type="checkbox" name="composeColprop" class="form-check-input" id="composeColprop"
+                                [(ngModel)]="composeColprop" (change)="change()">
                             <label class="form-check-label" for="composeColprop">Use</label>
                         </div>
                     </div>
@@ -196,13 +216,15 @@
                 <div class="form-group row" [hidden]="composeMix != 'glyph'">
                     <label class="col-md-4 col-form-label">Width</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="composeGlyphSpecWidth" min="2" [(ngModel)]="composeGlyphSpecWidth" (change)="change()">
+                        <input type="number" class="form-control" name="composeGlyphSpecWidth" min="2" [(ngModel)]="composeGlyphSpecWidth"
+                            (change)="change()">
                     </div>
                 </div>
                 <div class="form-group row" [hidden]="composeMix != 'glyph'">
                     <label class="col-md-4 col-form-label">Height</label>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" name="composeGlyphSpecHeight" min="2" [(ngModel)]="composeGlyphSpecHeight" (change)="change()">
+                        <input type="number" class="form-control" name="composeGlyphSpecHeight" min="2" [(ngModel)]="composeGlyphSpecHeight"
+                            (change)="change()">
                     </div>
                 </div>
 
@@ -211,7 +233,8 @@
                     <label class="col-md-4">Legend</label>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input type="checkbox" name="useLegend" class="form-check-input" id="useLegend" [(ngModel)]="useLegend" (change)="change()">
+                            <input type="checkbox" name="useLegend" class="form-check-input" id="useLegend" [(ngModel)]="useLegend"
+                                (change)="change()">
                             <label class="form-check-label" for="useLegend">Use</label>
                         </div>
                     </div>
@@ -220,7 +243,8 @@
                     <label class="col-md-4">Axis</label>
                     <div class="col-md-8">
                         <div class="form-check">
-                            <input type="checkbox" name="useAxis" class="form-check-input" id="useAxis" [(ngModel)]="useAxis" (change)="change()">
+                            <input type="checkbox" name="useAxis" class="form-check-input" id="useAxis" [(ngModel)]="useAxis"
+                                (change)="change()">
                             <label class="form-check-label" for="useAxis">Use</label>
                         </div>
                     </div>
@@ -229,7 +253,15 @@
         </div>
         <div class="col-md-7 offset-sm-1">
             <h5>Result</h5>
-            <div #result></div>
+            <div #result style="display:inline-block"></div>
+            <div class="text-right">
+                <button class="btn btn-secondary btn-sm mr-2">
+                    <fa-icon [icon]="['fas', 'bookmark']"></fa-icon> Bookmark
+                </button>
+                <button class="btn btn-primary btn-sm" (click)="download()">
+                    <fa-icon [icon]="['fas', 'download']"></fa-icon> Download
+                </button>
+            </div>
             <h5>Specification</h5>
             <pre class="pre-scrollable"><code>{{ spec }}</code></pre>
         </div>
