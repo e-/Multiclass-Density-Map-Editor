@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import * as MDM from 'multiclass-density-maps';
 import { isNumber } from 'util';
-import html2canvas from 'html2canvas';
+import * as html2canvas from 'html2canvas';
 
 @Component({
     selector: 'app-root',
