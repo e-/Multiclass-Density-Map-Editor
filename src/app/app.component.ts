@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import * as MDM from 'multiclass-density-maps';
-import { isNumber } from 'util';
+import { isNumber, isUndefined } from 'util';
 import * as html2canvas from 'html2canvas';
 
 @Component({
@@ -224,8 +224,8 @@ export class AppComponent implements OnInit {
         this.rescaleType = (spec.rescale && spec.rescale.type) ? spec.rescale.type : this.defaultRescaleType;
         if (this.rescaleType == 'equidepth') this.rescaleLevels = spec.rescale.levels || this.defaultRescaleLevels;
 
-        this.useLegend = spec.legend;
-        this.useAxis = spec.axis;
+        this.useLegend = isUndefined(spec.legend) ? this.defaultUseLegend : spec.legend;
+        this.useAxis = isUndefined(spec.axis) ? this.defaultUseAxis : spec.axis;
     }
 
     exportSpec() {
@@ -279,8 +279,8 @@ export class AppComponent implements OnInit {
         spec.rescale = { type: this.rescaleType };
         if (this.rescaleType == 'equidepth') spec.rescale.levels = this.rescaleLevels;
 
-        spec.legend = this.useLegend || this.defaultUseLegend;
-        spec.axis = this.useAxis || this.defaultUseAxis;
+        spec.legend = this.useLegend;
+        spec.axis = this.useAxis;
 
         return spec;
     }
