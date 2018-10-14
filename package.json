@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href /Multiclass-Density-Map-Editor/ && rm *.js *.css *.js.map *.css.map && cp dist/Multiclass-Density-Map-Editor/* . -r && rm -rf dist",
+    "build": "ng build --prod --base-href /Multiclass-Density-Map-Editor/",
+    "move": "rm -f *.js *.css *.js.map *.css.map && cp -r dist/Multiclass-Density-Map-Editor/* . && rm -rf dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

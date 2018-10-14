@@ -285,8 +285,26 @@ export class AppComponent implements OnInit {
         return spec;
     }
 
+    warningVisible = false;
+    warningCompose = 'none';
+
+    checkWarning() {
+        this.warningVisible = false;
+        this.warningCompose = null;
+        if(['weaving', 'propline', 'hatching', 'glyph', 'dotdensity'].includes(this.composeMix)) {
+            if(this.rebinType == 'none' ||
+                this.rebinType == 'square' && (this.rebinSize < 16) ||
+                this.rebinType == 'rect' && (this.rebinWidth * this.rebinHeight < 256)) {
+                this.warningVisible = true;
+                this.warningCompose = this.composeMix;
+                return true;
+            }
+        }
+        return false;
+    }
 
     change() {
+        if(this.checkWarning()) return;
         let spec = this.exportSpec();
 
         this.spec = JSON.stringify(spec, null, 2);

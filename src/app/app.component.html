@@ -252,6 +252,11 @@
             </form>
         </div>
         <div class="col-md-7 offset-sm-1">
+            <div class="alert alert-danger" role="alert" [hidden]="!warningVisible">
+                <strong>Error</strong>
+                It will take long time and produce uninterpretable results to use the selected <code>{{ warningCompose }}</code>
+                assembly operation without rebinning. Use rebinning with a proper number of bins.
+            </div>
             <h5>Result</h5>
             <div #result style="display:inline-block"></div>
             <div class="text-right">
