@@ -30,7 +30,7 @@
     "bootstrap": "^4.1.3",
     "core-js": "^2.5.4",
     "html2canvas": "^1.0.0-alpha.12",
-    "multiclass-density-maps": "^0.0.8",
+    "multiclass-density-maps": "^0.1.0",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },

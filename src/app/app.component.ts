@@ -16,8 +16,11 @@ export class AppComponent implements OnInit {
     dataType: number = 1;
 
     DatasetOptions = [
-        ['mn_data.json', 'Multivariable Normal Data'],
-        ['census.snappy_data.json', 'Synthetic Census Data'],
+        ['mn_data.json', 'Multivariable Normal'],
+        ['census.snappy_data.json', 'Synthetic Census'],
+        ['flight_data.json', 'Flight'],
+        ['notMNIST_xylab_data.json', 'notMNIST projected'],
+        ['nyc_crime_data.json', 'NYC Crime'],
     ]
 
     readonly defaultDataset = this.DatasetOptions[0][0];
@@ -309,7 +312,7 @@ export class AppComponent implements OnInit {
 
         this.spec = JSON.stringify(spec, null, 2);
 
-        let config = new MDM.Configuration(spec);
+        let config = new MDM.Config(spec);
         config.load('assets/').then(() => {
             let interp = new MDM.Interpreter(config);
 
